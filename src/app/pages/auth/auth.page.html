@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true">
+  <form
+    class="wrapper"
+    (submit)="register() ? signUp($event) : signIn($event)"
+    [formGroup]="form"
+  >
+    <h3>{{ register() ? 'SIGN-UP' : 'SIGN-IN' }}</h3>
+    <ion-item>
+      <ion-input
+        fill="outline"
+        type="email"
+        formControlName="email"
+        label="Email"
+        label-placement="floating"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        fill="outline"
+        type="password"
+        formControlName="password"
+        label="Password"
+        label-placement="floating"
+      ></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="!form.valid"
+      >{{ register() ? 'Sign-Up' : 'Sign-In' }}</ion-button
+    >
+    <ion-button type="button" (click)="register.set(!register())">
+      {{ register() ? 'Already have an account?' : 'Don\'t have an account?' }}
+    </ion-button>
+  </form>
+</ion-content>

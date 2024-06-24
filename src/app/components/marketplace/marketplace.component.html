@@ -1,0 +1,15 @@
+<ion-segment value="0" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="0">
+    <ion-label>Services</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="1">
+    <ion-label>Products</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>Professionals</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<div>
+  <ess-list-layout [loading]="fetchingData()" [listOfElements]="listOfElements()"></ess-list-layout>
+</div>

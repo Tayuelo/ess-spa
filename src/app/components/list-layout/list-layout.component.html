@@ -1,0 +1,9 @@
+<ion-list>
+  @for (el of listOfElements(); track el.title) {
+  <ess-card
+    [data]="{ title: el.title, subtitle: el.subtitle, content: el.content }"
+  ></ess-card>
+  } @empty {
+    {{ loading() ? 'Loading...' : 'No data' }}
+  }
+</ion-list>
