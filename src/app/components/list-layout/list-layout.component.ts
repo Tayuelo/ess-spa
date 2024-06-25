@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, input, output } from '@angular/core';
 import { IonList } from "@ionic/angular/standalone";
 import { ICard } from '../card/card.interface';
 import { CardModule } from '../card/card.module';
@@ -14,9 +14,9 @@ import { CardModule } from '../card/card.module';
 export class ListLayoutComponent  implements OnInit {
   public listOfElements = input<ICard[]>([]);
   public loading = input<boolean>(false);
+  public selectedItem = output<ICard>();
 
   constructor() { }
 
   ngOnInit() {}
-
 }

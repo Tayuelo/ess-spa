@@ -12,8 +12,7 @@ import {
   IonSegment,
   IonSegmentButton,
   IonLabel,
-  IonContent,
-} from '@ionic/angular/standalone';
+  IonContent, IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonItem, IonCheckbox, IonButton } from '@ionic/angular/standalone';
 import { ListLayoutComponent } from '../list-layout/list-layout.component';
 import { ICard } from '../card/card.interface';
 import { MarketplaceService } from './services/marketplace.service';
@@ -21,6 +20,8 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { ECategory } from '@shared/index';
 import { IBranchProduct, IBranchProfessional, IBranchService } from '@models/index';
+import { ModalController } from '@ionic/angular';
+import { ModalComponent } from '../modal/modal.component';
 
 type TabIndex = 0 | 1 | 0;
 
@@ -29,7 +30,7 @@ type TabIndex = 0 | 1 | 0;
   templateUrl: './marketplace.component.html',
   styleUrls: ['./marketplace.component.scss'],
   standalone: true,
-  imports: [
+  imports: [IonButton, IonCheckbox, IonItem, IonButtons, IonTitle, IonToolbar, IonHeader, IonModal, 
     IonContent,
     IonSegment,
     IonSegmentButton,
@@ -37,6 +38,7 @@ type TabIndex = 0 | 1 | 0;
     ListLayoutComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ModalController]
 })
 export class MarketplaceComponent implements OnInit {
   private marketplaceService = inject(MarketplaceService);
@@ -46,11 +48,14 @@ export class MarketplaceComponent implements OnInit {
   public fetchingData = signal(false);
   private selectedIndexEffect!: EffectRef;
   public selectedBranchId = signal('');
+  message = 'This modal example uses the modalController to present and dismiss modals.';
+  presentingElement!: HTMLElement;
 
-  constructor(private injector: Injector, private route: ActivatedRoute) {}
+  constructor(private injector: Injector, private route: ActivatedRoute, private modalCtrl: ModalController) {}
 
   ngOnInit() {
     this.registerEffects();
+    this.presentingElement = document.querySelector('.ion-page') as HTMLElement;
     this.route.params.pipe(map((x) => x['branchId'])).subscribe((branchId) => {
       this.selectedBranchId.set(branchId);
     });
@@ -89,6 +94,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchServices.map((branchService) => {
               return {
+                id: branchService.uid,
                 title: branchService.name,
                 subtitle: branchService.details,
                 content: branchService.price.toString(),
@@ -111,6 +117,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchProducts.map((branchProduct) => {
               return {
+                id: branchProduct.uid,
                 title: branchProduct.name,
                 subtitle: branchProduct.details,
                 content: branchProduct.price.toString(),
@@ -133,6 +140,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchProfessionals.map((branchProfessional) => {
               return {
+                id: branchProfessional.uid,
                 title: branchProfessional.name,
                 subtitle: branchProfessional.rating.toString(),
               };
@@ -141,5 +149,19 @@ export class MarketplaceComponent implements OnInit {
         },
         error: () => {},
       });
+  }
+
+  public async onSelectedItemChange(selectedItem: ICard) {
+    const modal = await this.modalCtrl.create({
+      component: ModalComponent,
+      presentingElement: this.presentingElement
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      this.message = `Hello, ${data}!`;
+    }
   }
 }

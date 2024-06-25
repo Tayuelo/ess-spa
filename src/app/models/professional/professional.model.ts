@@ -1,5 +1,5 @@
 export interface IBranchProfessional {
-    id: string;
+    uid: string;
     name: string;
     img: string;
     branchId: string;

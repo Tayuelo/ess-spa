@@ -1,7 +1,8 @@
 <ion-list>
   @for (el of listOfElements(); track el.title) {
   <ess-card
-    [data]="{ title: el.title, subtitle: el.subtitle, content: el.content }"
+    [data]="{ id: el.id, title: el.title, subtitle: el.subtitle, content: el.content }"
+    (click)="selectedItem.emit(el)"
   ></ess-card>
   } @empty {
     {{ loading() ? 'Loading...' : 'No data' }}

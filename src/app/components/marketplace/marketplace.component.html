@@ -11,5 +11,5 @@
 </ion-segment>
 
 <div>
-  <ess-list-layout [loading]="fetchingData()" [listOfElements]="listOfElements()"></ess-list-layout>
+  <ess-list-layout (selectedItem)="onSelectedItemChange($event)" [loading]="fetchingData()" [listOfElements]="listOfElements()"></ess-list-layout>
 </div>
