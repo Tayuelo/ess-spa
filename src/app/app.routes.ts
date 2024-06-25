@@ -23,11 +23,11 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'service-detail/:id',
+    path: 'partner-detail/:partnerId/branch/:branchId',
     loadComponent: () =>
-      import('./pages/branch-detail/branch-detail.page').then(
-        (m) => m.BranchDetailPage
-      ),
+    import('./pages/branch-detail/branch-detail.page').then(
+      (m) => m.BranchDetailPage
+    ),
   },
   {
     path: '',

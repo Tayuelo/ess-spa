@@ -37,6 +37,6 @@ export class PartnerDetailPage {
 
   navigateToServiceDetailPage() {
     this.headerService.backUrl.set('/partner-detail');
-    this.navCtrl.navigateForward('/service-detail/1');
+    this.navCtrl.navigateForward(`/partner-detail/${this.partnerId}/branch/6679e97183e8e01ca9441669`);
   }
 }

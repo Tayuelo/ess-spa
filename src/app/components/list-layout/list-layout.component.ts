@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, input } from '@angular/core';
 import { IonList } from "@ionic/angular/standalone";
 import { ICard } from '../card/card.interface';
 import { CardModule } from '../card/card.module';
@@ -9,6 +9,7 @@ import { CardModule } from '../card/card.module';
   styleUrls: ['./list-layout.component.scss'],
   imports: [IonList, CardModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListLayoutComponent  implements OnInit {
   public listOfElements = input<ICard[]>([]);

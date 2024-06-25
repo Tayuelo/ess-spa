@@ -4,18 +4,7 @@ import { ICard } from './card.interface';
 @Component({
   selector: 'ess-card',
   styleUrls: ['./card.component.scss'],
-  template: `
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{ data().title }}</ion-card-title>
-        <ion-card-subtitle>{{ data().subtitle }}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        {{ data().content }}
-      </ion-card-content>
-    </ion-card>
-  `,
+  templateUrl: './card.component.html',
 })
 export class CardComponent implements OnInit {
   public data = input.required<ICard>();
