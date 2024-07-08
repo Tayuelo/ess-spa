@@ -1,5 +1,5 @@
 export interface IBranchService {
-    uid: string;
+    _id: string;
     name: string;
     details: string;
     price: number;

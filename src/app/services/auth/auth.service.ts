@@ -10,18 +10,18 @@ export class AuthService {
   public isLoggedIn = signal(false);
 
   signIn(credentials: { email: string; password: string }) {
-    return this.apiService.post('/sign-in', credentials);
+    return this.apiService.post('/auth/sign-in', credentials);
   }
 
   signUp(credentials: { email: string; password: string }) {
-    return this.apiService.post('/sign-up', credentials);
+    return this.apiService.post('/auth/sign-up', credentials);
   }
 
   logout() {
-    return this.apiService.post('/logout', {});
+    return this.apiService.post('/auth/logout', {});
   }
 
   isAuthenticated() {
-    return this.apiService.get('/is-authenticated');
+    return this.apiService.get('/auth/is-authenticated');
   }
 }
