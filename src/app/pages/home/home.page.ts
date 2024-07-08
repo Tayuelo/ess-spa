@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewChild, inject, signal } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -26,6 +26,9 @@ import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { HeaderComponent, HeaderService } from 'src/app/components/header/header.component';
 import { NavController } from '@ionic/angular';
+import { PartnersService } from 'src/app/services/partners/partners.service';
+import { IBranch } from 'src/app/constants/branches';
+import { IPartner } from '@models/partner/partner.model';
 
 @Component({
   selector: 'ess-home',
@@ -58,18 +61,24 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
   @ViewChild(IonModal) modal!: IonModal;
-  
 
   private router = inject(Router);
   private authService = inject(AuthService);
   private navCtrl = inject(NavController);
   public headerService = inject(HeaderService);
+  private partnersService = inject(PartnersService);
 
-  public partners = [...PARTNERS].sort((a, b) => (a.name > b.name ? 1 : -1));
+  public partners = signal<IPartner[]>([]);
 
   message =
     'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name!: string;
+
+  ngOnInit() {
+    this.partnersService.getPartners().subscribe((partners: IPartner[]) => {
+      this.partners.set(partners);
+    });
+  }
 
   cancel() {
     this.modal.dismiss(null, 'cancel');

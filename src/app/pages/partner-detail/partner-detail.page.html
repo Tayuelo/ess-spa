@@ -2,16 +2,15 @@
   <ess-header></ess-header>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">partner-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-button
-    (click)="navigateToServiceDetailPage()"
-    expand="block"
-    fill="clear"
-    shape="round"
-    >Click me</ion-button
-  >
+  <ng-container *ngIf="partnerDetail() as partnerDetail">
+    <h2>{{ partnerDetail.name }}</h2>
+    <h2>{{ partnerDetail.description }}</h2>
+    <h5>Escoge tu sede favorita:</h5>
+    @for (branch of branches(); track branch._id) {
+    <ess-card
+      [data]="{ id: branch._id, title: branch.name, subtitle: branch.address }"
+      (click)="goTobranchDetail(branch._id)"
+    ></ess-card>
+    }
+  </ng-container>
 </ion-content>

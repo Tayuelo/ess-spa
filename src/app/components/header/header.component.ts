@@ -1,5 +1,5 @@
-import { Component, ElementRef, Injectable, OnInit, ViewChild, inject, signal } from '@angular/core';
-import { EventType, NavigationEnd, Router } from '@angular/router';
+import { Component, Injectable, OnInit, ViewChild, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,

@@ -23,7 +23,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'partner-detail/:partnerId/branch/:branchId',
+    path: 'branch/:id',
     loadComponent: () =>
     import('./pages/branch-detail/branch-detail.page').then(
       (m) => m.BranchDetailPage

@@ -26,10 +26,10 @@
 <!-- CONTENT -->
 <ion-content id="main-content" [fullscreen]="true">
   <ess-upcoming> {{ message }} </ess-upcoming>
-  @for (partner of partners; track partner.id) {
+  @for (partner of partners(); track partner._id) {
   <ess-card
-    [data]="{ title: partner.name, subtitle: partner.address }"
-    (click)="goToPartnerDetail(partner.id)"
+    [data]="{ id: partner._id, title: partner.name, subtitle: partner.address, content: partner.rating }"
+    (click)="goToPartnerDetail(partner._id)"
   ></ess-card>
   }
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

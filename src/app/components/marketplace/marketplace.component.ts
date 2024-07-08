@@ -56,7 +56,7 @@ export class MarketplaceComponent implements OnInit {
   ngOnInit() {
     this.registerEffects();
     this.presentingElement = document.querySelector('.ion-page') as HTMLElement;
-    this.route.params.pipe(map((x) => x['branchId'])).subscribe((branchId) => {
+    this.route.params.pipe(map((params) => params['id'])).subscribe((branchId) => {
       this.selectedBranchId.set(branchId);
     });
   }
@@ -94,7 +94,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchServices.map((branchService) => {
               return {
-                id: branchService.uid,
+                id: branchService._id,
                 title: branchService.name,
                 subtitle: branchService.details,
                 content: branchService.price.toString(),
@@ -117,7 +117,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchProducts.map((branchProduct) => {
               return {
-                id: branchProduct.uid,
+                id: branchProduct._id,
                 title: branchProduct.name,
                 subtitle: branchProduct.details,
                 content: branchProduct.price.toString(),
@@ -140,7 +140,7 @@ export class MarketplaceComponent implements OnInit {
           this.listOfElements.set(
             branchProfessionals.map((branchProfessional) => {
               return {
-                id: branchProfessional.uid,
+                id: branchProfessional._id,
                 title: branchProfessional.name,
                 subtitle: branchProfessional.rating.toString(),
               };

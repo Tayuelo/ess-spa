@@ -13,8 +13,6 @@ export class MarketplaceService {
     branchId: string,
     category: ECategory
   ): Observable<T> {
-    return this.apiService
-      .get<T>(`/branch-details/${branchId}/${category}`)
-      .pipe(map((response: any) => response[category]));
+    return this.apiService.get<T>(`/branch/${branchId}/${category}`);
   }
 }
